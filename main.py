@@ -1,6 +1,5 @@
 #Bài 1 ứng dụng Quản Lí Sinh Viên (CRUD cơ bản)
 import csv
-import os
 
 def dinh_dang_ten(text:str) -> str:
     return text.strip().title()
@@ -21,21 +20,6 @@ def doc_file_csv():
                 })
     except FileNotFoundError:
         print(f"File {'student.csv'} không tồn tại.")
-    return student
-def doc_file_input():
-    student = []
-    try:
-        with open('input.txt', mode='r', encoding='utf-8') as f:
-            for line in f:
-                mssv, hoten, tuoi, nganh = line.strip().split(',')
-                student.append({
-                    'MSSV': mssv,
-                    'Họ Tên': dinh_dang_ten(hoten),
-                    'Tuổi': int(tuoi),
-                    'Ngành': dinh_dang_nganh(nganh)
-                })
-    except FileNotFoundError:
-        print(f"File {'input.txt'} không tồn tại.")
     return student
 def save_to_csv(students):
     with open('student.csv', mode='w', newline='', encoding='utf-8') as f:
