@@ -1,7 +1,6 @@
 #Bài 1 ứng dụng Quản Lí Sinh Viên (CRUD cơ bản)
 import csv
 import os
-from py_compile import main
 filename = 'student.csv'
 fileinput = 'input.txt'
 def dinh_dang_ten(text:str) -> str:
