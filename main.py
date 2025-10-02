@@ -1,8 +1,7 @@
 #Bài 1 ứng dụng Quản Lí Sinh Viên (CRUD cơ bản)
 import csv
 import os
-filename = 'student.csv'
-fileinput = 'input.txt'
+
 def dinh_dang_ten(text:str) -> str:
     return text.strip().title()
 def dinh_dang_nganh(text:str) -> str:
@@ -11,7 +10,7 @@ def dinh_dang_nganh(text:str) -> str:
 def doc_file_csv():
     student = []
     try:
-        with open(filename, mode='r',newline='', encoding='utf-8') as f:
+        with open('student.csv', mode='r',newline='', encoding='utf-8') as f:
             reader = csv.DictReader(f)
             for row in reader:
                 student.append({
@@ -21,12 +20,12 @@ def doc_file_csv():
                     'Ngành': dinh_dang_nganh(row['Ngành'])
                 })
     except FileNotFoundError:
-        pass
+        print(f"File {'student.csv'} không tồn tại.")
     return student
 def doc_file_input():
     student = []
     try:
-        with open(fileinput, mode='r', encoding='utf-8') as f:
+        with open('input.txt', mode='r', encoding='utf-8') as f:
             for line in f:
                 mssv, hoten, tuoi, nganh = line.strip().split(',')
                 student.append({
@@ -36,10 +35,10 @@ def doc_file_input():
                     'Ngành': dinh_dang_nganh(nganh)
                 })
     except FileNotFoundError:
-        print(f"File {fileinput} không tồn tại.")
+        print(f"File {'input.txt'} không tồn tại.")
     return student
 def save_to_csv(students):
-    with open (filename, mode='w', newline='', encoding='utf-8') as f:
+    with open('student.csv', mode='w', newline='', encoding='utf-8') as f:
         fieldnames = ['MSSV', 'Họ Tên', 'Tuổi', 'Ngành']
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
