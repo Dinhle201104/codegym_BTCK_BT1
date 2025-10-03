@@ -1,9 +1,7 @@
 #Bài 1 ứng dụng Quản Lí Sinh Viên (CRUD cơ bản)
 import csv
 
-def dinh_dang_ten(text:str) -> str:
-    return text.strip().title()
-def dinh_dang_nganh(text:str) -> str:
+def dinh_dang_chu(text:str) -> str:
     return text.strip().title()
 
 def doc_file_csv():
@@ -14,9 +12,9 @@ def doc_file_csv():
             for row in reader:
                 student.append({
                     'MSSV': row['MSSV'],
-                    'Họ Tên': dinh_dang_ten(row['Họ Tên']),
+                    'Họ Tên': dinh_dang_chu(row['Họ Tên']),
                     'Tuổi': int(row['Tuổi']),
-                    'Ngành': dinh_dang_nganh(row['Ngành'])
+                    'Ngành': dinh_dang_chu(row['Ngành'])
                 })
     except FileNotFoundError:
         print(f"File {'student.csv'} không tồn tại.")
@@ -34,9 +32,9 @@ def add_sinh_vien(students):
         if sv['MSSV'] == mssv:
             print("MSSV đã tồn tại. Không thể thêm sinh viên.")
             return
-    name = dinh_dang_ten(input("Nhập Họ Tên: "))
+    name = dinh_dang_chu(input("Nhập Họ Tên: "))
     age = int(input("Nhập Tuổi: ")) 
-    major = dinh_dang_nganh(input("Nhập Ngành: "))
+    major = dinh_dang_chu(input("Nhập Ngành: "))
     students.append({'MSSV': mssv, 'Họ Tên': name, 'Tuổi': age, 'Ngành': major})
     print("Thêm sinh viên thành công.")
 def update_sinh_vien(students):
@@ -44,10 +42,10 @@ def update_sinh_vien(students):
     for sv in students:
         if sv['MSSV'] == mssv:
             print(f"Thông tin hiện tại: {sv}")
-            name = dinh_dang_ten(input("Nhập Họ Tên mới (bỏ trống để giữ nguyên): ") or sv['Họ Tên'])
+            name = dinh_dang_chu(input("Nhập Họ Tên mới (bỏ trống để giữ nguyên): ") or sv['Họ Tên'])
             age_input = input("Nhập Tuổi mới (bỏ trống để giữ nguyên): ")
             age = int(age_input) if age_input else sv['Tuổi']
-            major = dinh_dang_nganh(input("Nhập Ngành mới (bỏ trống để giữ nguyên): ") or sv['Ngành'])
+            major = dinh_dang_chu(input("Nhập Ngành mới (bỏ trống để giữ nguyên): ") or sv['Ngành'])
             sv.update({'Họ Tên': name, 'Tuổi': age, 'Ngành': major})
             print("Cập nhật sinh viên thành công.")
             return
