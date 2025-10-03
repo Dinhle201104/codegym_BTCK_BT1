@@ -9,8 +9,8 @@ def dinh_dang_nganh(text:str) -> str:
 def doc_file_csv():
     student = []
     try:
-        with open('student.csv', mode='r',newline='', encoding='utf-8') as f:
-            reader = csv.DictReader(f)
+        with open('student.csv', mode='r',newline='', encoding='utf-8') as file:
+            reader = csv.DictReader(file)
             for row in reader:
                 student.append({
                     'MSSV': row['MSSV'],
@@ -27,9 +27,9 @@ def save_to_csv(students):
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(students)
-# các hàm thêm xóa sửa tìm kiếm
+
 def them_sinh_vien(students):
-    mssv = input("Nhập MSSV: ").strip()
+    mssv = int(input("Nhập MSSV: ").strip())
     for sv in students:
         if sv['MSSV'] == mssv:
             print("MSSV đã tồn tại. Không thể thêm sinh viên.")
@@ -40,7 +40,7 @@ def them_sinh_vien(students):
     students.append({'MSSV': mssv, 'Họ Tên': name, 'Tuổi': age, 'Ngành': major})
     print("Thêm sinh viên thành công.")
 def cap_nhat_sinh_vien(students):
-    mssv = input("Nhập MSSV của sinh viên cần cập nhật: ").strip()
+    mssv = int(input("Nhập MSSV của sinh viên cần cập nhật: ").strip())
     for sv in students:
         if sv['MSSV'] == mssv:
             print(f"Thông tin hiện tại: {sv}")
@@ -53,7 +53,7 @@ def cap_nhat_sinh_vien(students):
             return
     print("Không tìm thấy sinh viên với MSSV đã nhập.")
 def xoa_sinh_vien(students):
-    mssv = input("Nhập MSSV của sinh viên cần xóa: ").strip()
+    mssv = int(input("Nhập MSSV của sinh viên cần xóa: ").strip())
     for sv in students:
         if sv['MSSV'] == mssv:
             students.remove(sv)
@@ -80,9 +80,7 @@ def hien_thi_danh_sach(students):
 def menu():
     students = doc_file_csv()
     if not students: 
-        students = doc_file_input()
-        if students:  
-            save_to_csv(students)
+        students = []
     while True:
         print("\nQuản Lí Sinh Viên")
         print("1. Thêm Sinh Viên")
