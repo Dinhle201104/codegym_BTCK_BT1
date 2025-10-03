@@ -28,7 +28,7 @@ def save_to_csv(students):
         writer.writeheader()
         writer.writerows(students)
 
-def them_sinh_vien(students):
+def add_sinh_vien(students):
     mssv = int(input("Nhập MSSV: ").strip())
     for sv in students:
         if sv['MSSV'] == mssv:
@@ -39,7 +39,7 @@ def them_sinh_vien(students):
     major = dinh_dang_nganh(input("Nhập Ngành: "))
     students.append({'MSSV': mssv, 'Họ Tên': name, 'Tuổi': age, 'Ngành': major})
     print("Thêm sinh viên thành công.")
-def cap_nhat_sinh_vien(students):
+def update_sinh_vien(students):
     mssv = int(input("Nhập MSSV của sinh viên cần cập nhật: ").strip())
     for sv in students:
         if sv['MSSV'] == mssv:
@@ -52,7 +52,7 @@ def cap_nhat_sinh_vien(students):
             print("Cập nhật sinh viên thành công.")
             return
     print("Không tìm thấy sinh viên với MSSV đã nhập.")
-def xoa_sinh_vien(students):
+def remove_sinh_vien(students):
     mssv = int(input("Nhập MSSV của sinh viên cần xóa: ").strip())
     for sv in students:
         if sv['MSSV'] == mssv:
@@ -60,7 +60,7 @@ def xoa_sinh_vien(students):
             print("Xóa sinh viên thành công.")
             return
     print("Không tìm thấy sinh viên với MSSV đã nhập.")
-def tim_sinh_vien(students):
+def find_sinh_vien(students):
     keyword = input("Nhập từ khóa tìm kiếm (MSSV hoặc Họ Tên): ").strip().lower()
     results = [sv for sv in students if keyword in sv['MSSV'].lower() or keyword in sv['Họ Tên'].lower()]
     if results:
@@ -91,13 +91,13 @@ def menu():
         print("6. Lưu và Thoát")
         choice = input("Chọn một tùy chọn (1-6): ").strip()
         if choice == '1':
-            them_sinh_vien(students)
+            add_sinh_vien(students)
         elif choice == '2':
-            cap_nhat_sinh_vien(students)
+            update_sinh_vien(students)
         elif choice == '3':
-            xoa_sinh_vien(students)
+            remove_sinh_vien(students)
         elif choice == '4':
-            tim_sinh_vien(students)
+            find_sinh_vien(students)
         elif choice == '5':
             hien_thi_danh_sach(students)
         elif choice == '6':
